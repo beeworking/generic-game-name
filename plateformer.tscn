@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://plateformer.gd" type="Script" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+transform/pos = Vector2( 22.4894, 27.6475 )
+transform/scale = Vector2( 0.59749, 0.631144 )
+script/script = ExtResource( 1 )
+
+

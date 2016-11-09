@@ -8,8 +8,6 @@ onready var screen_size = get_viewport_rect().size
 
 func _process(delta):
 	var pos = player.get_pos()
-	print(pos)
-	print(screen_size)
 	
 	if (pos.y > 0 and Input.is_action_pressed("ui_up")):
 	    pos.y += -SPEED * delta

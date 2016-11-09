@@ -7,6 +7,7 @@ onready var player = get_node("player")
 onready var screen_size = get_viewport_rect().size
 
 func _process(delta):
+	move(Vector2(0, 1))
 	var pos = player.get_pos()
 	
 	if (pos.y > 0 and Input.is_action_pressed("ui_up")):

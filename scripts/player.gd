@@ -1,27 +1,30 @@
+extends KinematicBody2D
 
-extends Node2D
+const GRAVITY 		= 200.0
+const WALK_SPEED 	= 200
 
-const SPEED = 150
+onready var velocity		= Vector2()
+onready var player			= get_node("player")
+onready var screen_size	= get_viewport_rect().size
 
-onready var player = get_node("player")
-onready var screen_size = get_viewport_rect().size
+func _fixed_process(delta):
+	velocity.y += delta * GRAVITY
 
-func _process(delta):
-	move(Vector2(0, 1))
-	var pos = player.get_pos()
-	
-	if (pos.y > 0 and Input.is_action_pressed("ui_up")):
-	    pos.y += -SPEED * delta
-	if (pos.y < screen_size.y and Input.is_action_pressed("ui_down")):
-	    pos.y += SPEED * delta
-	
-	if (pos.x > 0 and Input.is_action_pressed("ui_right")):
-	    pos.x += SPEED * delta
-	if (pos.x < screen_size.x and Input.is_action_pressed("ui_left")):
-	    pos.x += -SPEED * delta
-	
-	player.set_pos(pos)
+	if (Input.is_action_pressed("ui_left")):
+		velocity.x = - WALK_SPEED
+	elif (Input.is_action_pressed("ui_right")):
+		velocity.x =   WALK_SPEED
+	else:
+		velocity.x = 0
+	var motion = velocity * delta
+	motion = move(motion)
+
+	if (is_colliding()):
+		var n = get_collision_normal()
+		motion = n.slide(motion)
+		velocity = n.slide(velocity)
+		move(motion)
 
 func _ready():
-	set_process(true)
+	set_fixed_process(true)
 

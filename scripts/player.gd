@@ -1,19 +1,14 @@
-extends KinematicBody2D
-
-const GRAVITY 		= 200.0
-const WALK_SPEED 	= 200
-
-onready var velocity		= Vector2()
-onready var player			= get_node("player")
-onready var screen_size	= get_viewport_rect().size
+extends "res://scripts/controlled_entity.gd"
 
 func _fixed_process(delta):
-	velocity.y += delta * GRAVITY
+	velocity.y += delta * gravity
 
+	if (Input.is_action_pressed("ui_up")):
+		velocity.y -= 10
 	if (Input.is_action_pressed("ui_left")):
-		velocity.x = - WALK_SPEED
+		velocity.x = - walk_speed
 	elif (Input.is_action_pressed("ui_right")):
-		velocity.x =   WALK_SPEED
+		velocity.x =   walk_speed
 	else:
 		velocity.x = 0
 	var motion = velocity * delta

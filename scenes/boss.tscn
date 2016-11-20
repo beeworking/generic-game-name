@@ -18,6 +18,12 @@ collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
 script/script = ExtResource( 1 )
+gravity = 5.0
+walk_speed = 200
+up_motion_input = "boss_up"
+down_motion_input = "ui_down"
+left_motion_input = "boss_left"
+right_motion_input = "boss_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
